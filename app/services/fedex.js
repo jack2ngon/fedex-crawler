@@ -111,6 +111,7 @@ const search = async (date, zipcode, country) => {
                 }
             });
         }
+	    console.log(products);
         break;
     }
     if (webBrowser) {
