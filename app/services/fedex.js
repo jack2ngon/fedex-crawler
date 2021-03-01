@@ -59,7 +59,7 @@ const searchByReferences = async (date, zipcode, country, refs) => {
         throw new FedexLoadTrackingPageException(401, 'Cannot load fedex tracking page');
     }
 
-    const results = await Promise.all(_.chunk(references, 25).map(async (batchReferences) => {
+    const results = await Promise.all(_.chunk(references, 30).map(async (batchReferences) => {
         const batchReferencesText = batchReferences.join(',');
         return await crawlFedexShipment(date, batchReferencesText, zipcode, country, webPage);
     }));
