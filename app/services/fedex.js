@@ -110,6 +110,9 @@ const searchByReferences = async (date, zipcode, country, refs) => {
             }
         });
     }
+    if (webBrowser) {
+        await webBrowser.close();
+    }
     // console.log(products);
     return products;
 }
