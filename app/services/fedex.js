@@ -62,10 +62,10 @@ const searchByReferences = async (date, zipcode, country, refs) => {
 
     const results = await Promise.all(_.chunk(references, 30).map(async (batchReferences) => {
         const batchReferencesText = batchReferences.join(',');
-        console.log(batchReferencesText);
+        // console.log(batchReferencesText);
         return await crawlFedexShipment(date, batchReferencesText, zipcode, country, webPage);
     }));
-    console.log(results);
+    // console.log(results);
     for(const result of results) {
         const foundProducts = _.get(result, 'TrackPackagesResponse.packageList', []);
         _.map(foundProducts, (foundProduct) => {
@@ -110,7 +110,7 @@ const searchByReferences = async (date, zipcode, country, refs) => {
             }
         });
     }
-    console.log(products);
+    // console.log(products);
     return products;
 }
 
