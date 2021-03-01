@@ -5,6 +5,7 @@ const { FedexLoadTrackingPageException } = require('../../exceptions/fedex');
 
 const searchByReferences = async (date, zipcode, country, refs) => {
     const references = refs.trim().split(',');
+    console.log(references);
 
     let products = [];
     let webBrowser;
@@ -62,7 +63,7 @@ const searchByReferences = async (date, zipcode, country, refs) => {
         const batchReferencesText = batchReferences.join(',');
         return await crawlFedexShipment(date, batchReferencesText, zipcode, country, webPage);
     }));
-
+    console.log(results);
     for(const result of results) {
         const foundProducts = _.get(result, 'TrackPackagesResponse.packageList', []);
         _.map(foundProducts, (foundProduct) => {
@@ -107,7 +108,7 @@ const searchByReferences = async (date, zipcode, country, refs) => {
             }
         });
     }
-
+    console.log(products);
     return products;
 }
 
