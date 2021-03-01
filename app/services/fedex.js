@@ -4,9 +4,10 @@ const config = require('../../config');
 const { FedexLoadTrackingPageException } = require('../../exceptions/fedex');
 
 const searchByReferences = async (date, zipcode, country, refs) => {
-    const references = refs.trim().split(',');
-    console.log(references);
-
+    let references = refs.trim().split(',');
+    references = _.map(references, (ref) => {
+        return `"${ref}"`;
+    });
     let products = [];
     let webBrowser;
     const argsWebBrowser = [
@@ -61,6 +62,7 @@ const searchByReferences = async (date, zipcode, country, refs) => {
 
     const results = await Promise.all(_.chunk(references, 30).map(async (batchReferences) => {
         const batchReferencesText = batchReferences.join(',');
+        console.log(batchReferencesText);
         return await crawlFedexShipment(date, batchReferencesText, zipcode, country, webPage);
     }));
     console.log(results);
