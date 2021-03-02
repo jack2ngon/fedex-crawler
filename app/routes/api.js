@@ -17,5 +17,6 @@ module.exports = (app) => {
         }
     });
     apiRouter.get('/fedex/search', fedexController.search);
+    apiRouter.get('/fedex/search-by-refs', fedexController.searchByRefs);
     app.use('/v1/', apiRouter);
 };
